@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <numeric>
 
+// SOLUTION 1: Create a subset (using recursion) of all possible trade combinations, calculate profit of each and select the maximum
 void RecTransactionSet(std::vector<std::pair<int, int>> sofar, std::vector<int>& prices, int k, int index_start, std::vector< std::vector< std::pair<int, int> > >* pVec)
 {
 	int L = prices.size();
@@ -24,11 +25,8 @@ void RecTransactionSet(std::vector<std::pair<int, int>> sofar, std::vector<int>&
 		}
 	}
 }
-
 int CalcProfit(std::vector<int> prices, std::vector< std::vector< std::pair<int, int> > >* pVec)
 {
-	std::vector<int> profit(pVec->size());
-
 	int max_profit = std::accumulate(pVec->begin(), pVec->end(), 0, 
 	[&prices](int m, std::vector< std::pair<int, int>> v) 
 	{
@@ -50,7 +48,6 @@ int CalcProfit(std::vector<int> prices, std::vector< std::vector< std::pair<int,
 	});
 	return max_profit;
 }
-
 int maxProfitWithKTransactions(std::vector<int> prices, int k)
 {
 	if (prices.size() < 2)
@@ -59,19 +56,17 @@ int maxProfitWithKTransactions(std::vector<int> prices, int k)
 	}
 	else
 	{
-		int maxprofit = 0;
 		int i = std::min(int(prices.size()-1),k);
-		{
-			auto pVec = new std::vector< std::vector< std::pair<int, int> > >;
-			RecTransactionSet(std::vector<std::pair<int, int>>(), prices, i, 0, pVec);
-			int calcprofit = CalcProfit(prices, pVec);
-			if (calcprofit > maxprofit) maxprofit = calcprofit;
-		}
+		auto pVec = new std::vector<std::vector<std::pair<int,int>>>;
+
+		RecTransactionSet(std::vector<std::pair<int, int>>(), prices, i, 0, pVec);
+		int maxprofit = CalcProfit(prices, pVec);
+		delete pVec;
 		return maxprofit;
 	}
 }
 
-
+// SOLUTION 2: AlgoExpert solution
 
 
 int main()
