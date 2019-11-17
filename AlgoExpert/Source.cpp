@@ -7,14 +7,14 @@ void RecTransactionSet(std::vector<std::pair<int, int>> sofar, std::vector<int>&
 {
 	int L = prices.size();
 
-	for (int i = 0 + index_start; i <= L - 2*k ; i++)
+	for (int i = 0 + index_start; i <= L - 2*k+1 ; i++)
 	{
-		for (int l = L - 2*k + 1 - i ; l > 0; l--)
+		for (int l = L - k - i ; l > 0; l--)
 		{
 			sofar.emplace_back(std::pair<int, int>{ i, i + l });
 			if ( k > 1 )
 			{
-				RecTransactionSet(sofar, prices, k-1, i+l+1, pVec);
+				RecTransactionSet(sofar, prices, k-1, i+l, pVec);
 			}
 			else
 			{
@@ -39,15 +39,14 @@ int CalcProfit(std::vector<int> prices, std::vector< std::vector< std::pair<int,
 			std::cout << "("<<p.first << "," << p.second << "),";
 		}
 		std::cout << profit<<"\n";
-		(profit > m) ? {return profit; } : {return m; };
-		/*if (profit > m)
+		if (profit > m)
 		{
 			return profit;
 		}
 		else
 		{
 			return m;
-		}*/
+		}
 	});
 	return max_profit;
 }
@@ -61,7 +60,7 @@ int maxProfitWithKTransactions(std::vector<int> prices, int k)
 	else
 	{
 		int maxprofit = 0;
-		for (int i = std::min(k, int(prices.size() / 2)); i > 0; i--)
+		int i = std::min(int(prices.size()-1),k);
 		{
 			auto pVec = new std::vector< std::vector< std::pair<int, int> > >;
 			RecTransactionSet(std::vector<std::pair<int, int>>(), prices, i, 0, pVec);
@@ -78,7 +77,8 @@ int maxProfitWithKTransactions(std::vector<int> prices, int k)
 int main()
 {
 	//std::vector<int> prices = { 1,100,101,200,201,300,301,400,401,500 };
-	std::vector<int> prices = { 5,11,3,50,40,90 };
+	//std::vector<int> prices = { 5,11,3,50,60,90 };
+	std::vector<int> prices = { 1,10 };
 	int max_profit = maxProfitWithKTransactions(prices, 3);
 	std::cout << "Max profit is: " << max_profit;
 
