@@ -1,4 +1,5 @@
-# AlgoExpert / Max-Profit-With-K-Transactions-C++
+# algorithms / Max-Profit-With-K-Transactions-C++
+AlgoExpert.io challenge.<br>
 Implementation of a sample question on https://www.algoexpert.io (category: very hard)<br>
 
 Given:<br>
