@@ -19,4 +19,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Algo1_maxprofit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algo2_largestrange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
